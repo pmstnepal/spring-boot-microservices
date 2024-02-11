@@ -13,16 +13,16 @@ import java.util.List;
 @FeignClient(name = "SERVICE-MICROSERVICE")
 public interface ServiceClient {
 
-    @GetMapping("/getAllServices")
+    @GetMapping("/service/getAllServices")
     List<Service> getAllServices();
 
-    @GetMapping("/getServiceByID/{id}")
+    @GetMapping("/service/getServiceByID/{id}")
     Service getServicesByID(@PathVariable("id") Long id);
 
-    @PostMapping("/addNewService")
+    @PostMapping("/service/addNewService")
     String addNewService(@RequestBody Service service);
 
-    @GetMapping("/getServiceCount")
+    @GetMapping("/service/getServiceCount")
     String getServiceCount();
 
 }

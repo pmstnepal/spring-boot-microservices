@@ -31,20 +31,20 @@ public class PatientController {
         patients = patientService.getAllPatients();
     }
 
-    @GetMapping("/")
+    @GetMapping("/patient")
     public String viewHomePage() {
         log.info("Loading HomePage!!");
         return "index";
     }
 
-    @GetMapping("/getAllPatients")
+    @GetMapping("/patient/getAllPatients")
     public String getAllPatients(Model model) {
         log.info("Loading All Patients!!");
         model.addAttribute("patientsList", patients);
         return "patients";
     }
 
-    @GetMapping("/getAllServices")
+    @GetMapping("/patient/getAllServices")
     @CircuitBreaker(name = "getAllServicesBreaker", fallbackMethod = "getAllServicesFallback")
     public String getAllServices(Model model) {
         log.info("Loading Available Services from Service Microservice!!");
@@ -59,7 +59,7 @@ public class PatientController {
         return "services";
     }
 
-    @GetMapping("/registerNewPatient")
+    @GetMapping("/patient/registerNewPatient")
     public String registerNewPatient(Model model) {
         Patient patient = new Patient();
         Service service = new Service();
@@ -69,7 +69,7 @@ public class PatientController {
         return "newPatient";
     }
 
-    @PostMapping("/savePatient")
+    @PostMapping("/patient/savePatient")
     public String savePatient(@ModelAttribute("patient") Patient patient, @ModelAttribute("service") Service service) {
         log.info("Registered Patient!!");
         patient.setServices(List.of(service));
@@ -77,7 +77,7 @@ public class PatientController {
         return "redirect:/";
     }
 
-    @GetMapping("/addNewService")
+    @GetMapping("/patient/addNewService")
     public String addNewService(Model model) {
         Service service = new Service();
         log.info("Adding a new Service!!");
@@ -85,7 +85,7 @@ public class PatientController {
         return "newService";
     }
 
-    @PostMapping("/saveService")
+    @PostMapping("/patient/saveService")
     public String saveService(@ModelAttribute("service") Service service) {
         log.info("Calling Service Microservice for adding a new Service!!");
         String result = serviceClient.addNewService(service);
@@ -93,7 +93,7 @@ public class PatientController {
         return "redirect:/";
     }
 
-    @GetMapping("/getLatestCount")
+    @GetMapping("/patient/getLatestCount")
     public String getLatestCount(Model model) {
         log.info("Getting Services Count from Service Microservice!!");
         model.addAttribute("servicesCount", serviceClient.getServiceCount());
@@ -102,7 +102,7 @@ public class PatientController {
         return "latestCount";
     }
 
-    @GetMapping("/getByID")
+    @GetMapping("/patient/getByID")
     public String getByID(Model model) {
         Patient patient = new Patient();
         Service service = new Service();
@@ -112,14 +112,14 @@ public class PatientController {
         return "getByID";
     }
 
-    @PostMapping("/getPatientByID")
+    @PostMapping("/patient/getPatientByID")
     public String getPatientByID(@ModelAttribute("patient") Patient patient, Model model) {
         log.info("Get Patient by ID!!");
         model.addAttribute("patient", patients.stream().filter(p->p.getId().intValue() == patient.getId().intValue()).collect(Collectors.toList()));
         return "patientDetails";
     }
 
-    @PostMapping("/getServiceByID")
+    @PostMapping("/patient/getServiceByID")
     public String getServiceByID(@ModelAttribute("service") Service service, Model model) {
         log.info("Calling Service Microservice to get the Service by ID!!");
         Service serviceById = serviceClient.getServicesByID(service.getId());

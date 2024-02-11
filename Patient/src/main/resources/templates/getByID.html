@@ -13,20 +13,20 @@
     <h2>Welcome to Patient Management Application</h2>
     <br>
     <h3>-- Get Patient By ID --</h3>
-    <form action="#" th:action="@{/getPatientByID}" th:object="${patient}" method="POST">
+    <form action="#" th:action="@{/patient/getPatientByID}" th:object="${patient}" method="POST">
         <input type="number" th:field="*{id}" placeholder="Patient ID"
                class="form-control mb-4 col-4">
         <button type="submit" class="btn btn-info col-2">Get Patient</button>
     </form>
     <br>
     <h3>-- Get Service By ID --</h3>
-    <form action="#" th:action="@{/getServiceByID}" th:object="${service}" method="POST">
+    <form action="#" th:action="@{/patient/getServiceByID}" th:object="${service}" method="POST">
         <input type="number" th:field="*{id}" placeholder="Service ID"
                class="form-control mb-4 col-4">
         <button type="submit" class="btn btn-info col-2">Get Service</button>
     </form>
     <hr>
-    <a th:href="@{/}"> Back to HomePage</a>
+    <a th:href="@{/patient}"> Back to HomePage</a>
 </div>
 </body>
 </html>

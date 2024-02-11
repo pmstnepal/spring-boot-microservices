@@ -13,7 +13,7 @@
     <h2>Welcome to Patient Management Application</h2>
     <br>
     <h3>-- Register a New Patient --</h3>
-    <form action="#" th:action="@{/savePatient}" th:object="${patient}"
+    <form action="#" th:action="@{/patient/savePatient}" th:object="${patient}"
           method="POST">
         <input type="text" th:field="*{id}" placeholder="Patient ID"
                class="form-control mb-4 col-4">
@@ -28,7 +28,7 @@
         <button type="submit" class="btn btn-info col-2">Register Patient</button>
     </form>
     <hr>
-    <a th:href="@{/}"> Back to HomePage</a>
+    <a th:href="@{/patient}"> Back to HomePage</a>
 </div>
 </body>
 </html>

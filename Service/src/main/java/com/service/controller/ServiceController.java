@@ -20,32 +20,32 @@ public class ServiceController {
         services = appService.getAllServices();
     }
 
-    @GetMapping("/")
+    @GetMapping("/service")
     public String viewHomePage() {
         log.info("Loading HomePage!!");
         return "Welcome to Service Microservice!!";
     }
 
-    @GetMapping("/getAllServices")
+    @GetMapping("/service/getAllServices")
     public List<Service> getAllServices() {
         log.info("Loading Available Services!!");
         return services;
     }
 
-    @PostMapping("/addNewService")
+    @PostMapping("/service/addNewService")
     public String addNewService(@RequestBody Service service) {
         log.info("Adding a New Service!!");
         services.add(service);
         return "Successfully Added a New Service";
     }
 
-    @GetMapping("/getServiceCount")
+    @GetMapping("/service/getServiceCount")
     public Integer getServiceCount() {
         log.info("Getting Latest Count!!");
         return services.size();
     }
 
-    @GetMapping("/getServiceByID/{id}")
+    @GetMapping("/service/getServiceByID/{id}")
     public Service getServiceByID(@PathVariable Long id) {
         log.info("Getting Service by ID!!");
         return services.stream().filter(p->p.getId().intValue() == id.intValue()).findFirst().orElse(null);
