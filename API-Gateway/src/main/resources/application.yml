@@ -1,0 +1,16 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: PATIENT-MICROSERVICE
+          uri: lb://PATIENT-MICROSERVICE
+          predicates:
+            - Path=/patient/**
+        - id: SERVICE-MICROSERVICE
+          uri: lb://SERVICE-MICROSERVICE
+          predicates:
+            - Path=/service/**
