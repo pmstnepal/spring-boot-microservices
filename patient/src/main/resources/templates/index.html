@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Patient Management Application</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body class="bg-secondary p-3">
+<div align="center">
+    <h2>Welcome to Patient Management Application</h2>
+    <br><br>
+    <h3>-- Get All Registered Patients --</h3>
+    <a th:href="@{/getAllPatients}" class="btn btn-primary btn-sm mb-3" >Get All Patients</a>
+    <br><br>
+    <h3>-- Get All Available Services --</h3>
+    <a th:href="@{/getAllServices}" class="btn btn-primary btn-sm mb-3" >Get Available Services</a>
+    <br><br>
+    <h3>-- Register a New Patient --</h3>
+    <a th:href="@{/registerNewPatient}" class="btn btn-primary btn-sm mb-3" >Register a New Patient</a>
+    <br><br>
+    <h3>-- Add a New Service --</h3>
+    <a th:href="@{/addNewService}" class="btn btn-primary btn-sm mb-3" >Add a New Service</a>
+    <br><br>
+    <h3>-- Check Number of Patients and Services Available --</h3>
+    <a th:href="@{/getLatestCount}" class="btn btn-primary btn-sm mb-3" >Check Number of Patients and Services Available</a>
+    <br><br>
+    <h3>-- Get Patient/Service By ID --</h3>
+    <a th:href="@{/getByID}" class="btn btn-primary btn-sm mb-3" >Get Patient/Service By ID</a>
+</div>
+</body>
+</html>
