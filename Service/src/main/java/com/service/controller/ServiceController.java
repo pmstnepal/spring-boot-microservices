@@ -10,6 +10,7 @@ import java.util.List;
 
 @Log4j2
 @RestController
+@RequestMapping("/service")
 public class ServiceController {
     private final AppService appService;
     private List<Service> services;
@@ -20,32 +21,32 @@ public class ServiceController {
         services = appService.getAllServices();
     }
 
-    @GetMapping("/service")
+    @GetMapping("/")
     public String viewHomePage() {
         log.info("Loading HomePage!!");
         return "Welcome to Service Microservice!!";
     }
 
-    @GetMapping("/service/getAllServices")
+    @GetMapping("/getAllServices")
     public List<Service> getAllServices() {
         log.info("Loading Available Services!!");
         return services;
     }
 
-    @PostMapping("/service/addNewService")
+    @PostMapping("/addNewService")
     public String addNewService(@RequestBody Service service) {
         log.info("Adding a New Service!!");
         services.add(service);
         return "Successfully Added a New Service";
     }
 
-    @GetMapping("/service/getServiceCount")
+    @GetMapping("/getServiceCount")
     public Integer getServiceCount() {
         log.info("Getting Latest Count!!");
         return services.size();
     }
 
-    @GetMapping("/service/getServiceByID/{id}")
+    @GetMapping("/getServiceByID/{id}")
     public Service getServiceByID(@PathVariable Long id) {
         log.info("Getting Service by ID!!");
         return services.stream().filter(p->p.getId().intValue() == id.intValue()).findFirst().orElse(null);

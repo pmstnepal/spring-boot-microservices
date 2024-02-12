@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @Log4j2
+@RequestMapping("/patient")
 public class PatientController {
     private final PatientService patientService;
     private List<Patient> patients;
@@ -31,20 +33,20 @@ public class PatientController {
         patients = patientService.getAllPatients();
     }
 
-    @GetMapping("/patient")
+    @GetMapping("/")
     public String viewHomePage() {
         log.info("Loading HomePage!!");
         return "index";
     }
 
-    @GetMapping("/patient/getAllPatients")
+    @GetMapping("/getAllPatients")
     public String getAllPatients(Model model) {
         log.info("Loading All Patients!!");
         model.addAttribute("patientsList", patients);
         return "patients";
     }
 
-    @GetMapping("/patient/getAllServices")
+    @GetMapping("/getAllServices")
     @CircuitBreaker(name = "getAllServicesBreaker", fallbackMethod = "getAllServicesFallback")
     public String getAllServices(Model model) {
         log.info("Loading Available Services from Service Microservice!!");
@@ -59,7 +61,7 @@ public class PatientController {
         return "services";
     }
 
-    @GetMapping("/patient/registerNewPatient")
+    @GetMapping("/registerNewPatient")
     public String registerNewPatient(Model model) {
         Patient patient = new Patient();
         Service service = new Service();
@@ -69,7 +71,7 @@ public class PatientController {
         return "newPatient";
     }
 
-    @PostMapping("/patient/savePatient")
+    @PostMapping("/savePatient")
     public String savePatient(@ModelAttribute("patient") Patient patient, @ModelAttribute("service") Service service) {
         log.info("Registered Patient!!");
         patient.setServices(List.of(service));
@@ -77,7 +79,7 @@ public class PatientController {
         return "redirect:/";
     }
 
-    @GetMapping("/patient/addNewService")
+    @GetMapping("/addNewService")
     public String addNewService(Model model) {
         Service service = new Service();
         log.info("Adding a new Service!!");
@@ -85,7 +87,7 @@ public class PatientController {
         return "newService";
     }
 
-    @PostMapping("/patient/saveService")
+    @PostMapping("/saveService")
     public String saveService(@ModelAttribute("service") Service service) {
         log.info("Calling Service Microservice for adding a new Service!!");
         String result = serviceClient.addNewService(service);
@@ -93,7 +95,7 @@ public class PatientController {
         return "redirect:/";
     }
 
-    @GetMapping("/patient/getLatestCount")
+    @GetMapping("/getLatestCount")
     public String getLatestCount(Model model) {
         log.info("Getting Services Count from Service Microservice!!");
         model.addAttribute("servicesCount", serviceClient.getServiceCount());
@@ -102,7 +104,7 @@ public class PatientController {
         return "latestCount";
     }
 
-    @GetMapping("/patient/getByID")
+    @GetMapping("/getByID")
     public String getByID(Model model) {
         Patient patient = new Patient();
         Service service = new Service();
@@ -112,14 +114,14 @@ public class PatientController {
         return "getByID";
     }
 
-    @PostMapping("/patient/getPatientByID")
+    @PostMapping("/getPatientByID")
     public String getPatientByID(@ModelAttribute("patient") Patient patient, Model model) {
         log.info("Get Patient by ID!!");
         model.addAttribute("patient", patients.stream().filter(p->p.getId().intValue() == patient.getId().intValue()).collect(Collectors.toList()));
         return "patientDetails";
     }
 
-    @PostMapping("/patient/getServiceByID")
+    @PostMapping("/getServiceByID")
     public String getServiceByID(@ModelAttribute("service") Service service, Model model) {
         log.info("Calling Service Microservice to get the Service by ID!!");
         Service serviceById = serviceClient.getServicesByID(service.getId());
