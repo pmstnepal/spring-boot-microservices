@@ -1,3 +1,3 @@
-# Microservices
+# Patient Management Application
 
-Java, SpringBoot, ThymeLeaf, Microservices Architecture, OpenFeign Client, Netflix Eureka, Resilience4j, Spring Cloud Gateway
+The purpose of this project is to Learn, Develop and Explore Microservices using Java, SpringBoot, ThymeLeaf, OpenFeign Client, Netflix Eureka, Resilience4j and Spring Cloud Gateway.
