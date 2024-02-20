@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Patient Management Application</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body class="bg-secondary p-3">
+<div align="center">
+    <h2>Welcome to Patient Management Application</h2>
+    <br>
+    <h3>-- Number of Patients and Services Available --</h3>
+    <table style="width:80%" border="1"
+           class = "table table-striped table-responsive-md bg-primary p-3">
+        <thead>
+        <tr>
+            <th>Total Patients Count</th>
+            <th>Total Services Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${patientsCount}"></td>
+            <td th:text="${servicesCount}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <a th:href="@{/patient/}"> Back to HomePage</a>
+</div>
+</body>
+</html>
