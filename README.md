@@ -1,2 +1,2 @@
 # Patient Management Application
-Java, SpringBoot, Microservices Architecture, ThymeLeaf, OpenFeign Client, Netflix Eureka, Resilience4j and Spring Cloud Gateway
+Java, Spring Boot, Microservices Architecture, ThymeLeaf, REST API, OpenFeign Client, Netflix Eureka, Resilience4j and Spring Cloud Gateway
